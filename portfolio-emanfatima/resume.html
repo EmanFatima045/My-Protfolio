@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eman Fatima — Resume</title>
+  <style>
+    @page {
+      size: letter;
+      margin: 0.5in 0.5in 0.5in 0.5in;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Times New Roman', Times, Georgia, serif;
+      color: #111;
+      line-height: 1.35;
+      font-size: 10pt;
+      background: #fdfdfd;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 24px;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .name {
+      font-size: 20pt;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .contact-info {
+      font-size: 9.5pt;
+      color: #333;
+    }
+    .contact-info a {
+      color: #0044cc;
+      text-decoration: none;
+    }
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+    .section-title {
+      font-size: 11pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      border-bottom: 1.5px solid #111;
+      padding-bottom: 2px;
+      margin-top: 12px;
+      margin-bottom: 6px;
+      letter-spacing: 0.03em;
+    }
+    .summary {
+      font-size: 9.5pt;
+      text-align: justify;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+    .entry {
+      margin-bottom: 8px;
+    }
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 9.5pt;
+    }
+    .entry-title {
+      font-weight: bold;
+    }
+    .entry-date {
+      font-style: italic;
+      font-size: 9pt;
+      color: #333;
+    }
+    .entry-subtitle {
+      display: flex;
+      justify-content: space-between;
+      font-size: 9pt;
+      font-style: italic;
+      color: #333;
+      margin-bottom: 3px;
+    }
+    ul.bullets {
+      list-style-type: square;
+      padding-left: 18px;
+      margin-top: 2px;
+    }
+    ul.bullets li {
+      font-size: 9.2pt;
+      margin-bottom: 3px;
+      line-height: 1.35;
+      text-align: justify;
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      row-gap: 4px;
+      font-size: 9.2pt;
+      margin-top: 4px;
+    }
+    .skill-cat {
+      font-weight: bold;
+    }
+    .print-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #8b1e2d;
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-family: sans-serif;
+      font-size: 13px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      z-index: 1000;
+    }
+    .print-btn:hover {
+      background: #5c101c;
+    }
+    @media print {
+      body {
+        padding: 0;
+        background: #fff;
+      }
+      .container {
+        padding: 0;
+        max-width: 100%;
+      }
+      .print-btn {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="print-btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
+
+  <div class="container">
+    <!-- ═══ HEADER ═══ -->
+    <div class="header">
+      <div class="name">Eman Fatima</div>
+      <div class="contact-info">
+        03038775831 | <a href="mailto:emanfatima60860@gmail.com">emanfatima60860@gmail.com</a> | 
+        <a href="https://www.linkedin.com/in/eman-fatima-512a01246/" target="_blank">LinkedIn Profile</a> | 
+        <a href="https://github.com/EmanFatima045" target="_blank">GitHub: EmanFatima045</a> | Lahore, Pakistan
+      </div>
+    </div>
+
+    <!-- ═══ PROFESSIONAL SUMMARY ═══ -->
+    <div class="section-title">Professional Summary</div>
+    <p class="summary">
+      <strong>Artificial Intelligence Engineer & Cybersecurity Analyst</strong> and BS Cybersecurity & Digital Forensics graduate (CGPA 3.50) from The Islamia University of Bahawalpur. Hands-on experience developing full-stack WordPress portals, custom plugins, MySQL database & backend APIs, automated workflow pipelines (n8n), deep learning model selection & training, and audio forensics tampering detection. Published researcher (ICACNC 2025) with demonstrated leadership in technical event moderation and IEEE cybersecurity programs. Seeking to leverage engineering, automation, and security competencies to drive scalable enterprise solutions.
+    </p>
+
+    <!-- ═══ PROFESSIONAL EXPERIENCE ═══ -->
+    <div class="section-title">Professional Experience</div>
+
+    <!-- CIT -->
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">WordPress Developer, AI Automation & Cybersecurity Specialist</span>
+        <span class="entry-date">Jul 2026 – Present (Selected: 20 Jul 2026)</span>
+      </div>
+      <div class="entry-subtitle">
+        <span>Center of Information Technology (CIT) — <em>Director: Sir Amar Jaffri | Supervisor: Sir Aman Ijaz</em></span>
+        <span>Pakistan | Onsite</span>
+      </div>
+      <ul class="bullets">
+        <li><strong>Enterprise Portal Architecture:</strong> Architected, developed, and deployed the complete official web portal for Center of Information Technology (<a href="https://www.cit.com.pk" target="_blank">www.cit.com.pk</a>), incorporating About Us, Events, Directory Links, Contact, and interactive Geo-location / geological mapping modules.</li>
+        <li><strong>Custom Plugin & Backend Engineering:</strong> Engineered bespoke custom WordPress plugins and structured scalable MySQL database schemas, backend APIs, and data queries for optimized web platform performance.</li>
+        <li><strong>AI & Workflow Automation:</strong> Integrated custom AI chatbot solutions and implemented n8n & NIT automated workflow pipelines to streamline backend operations, automated data synchronization, and event notifications.</li>
+        <li><strong>Cybersecurity Hardening:</strong> Enforced website security controls, role-based access policies (RBAC), and vulnerability mitigations under executive supervision.</li>
+      </ul>
+    </div>
+
+    <!-- CMIT -->
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Artificial Intelligence Intern (CMIT Internship Program 2025–26)</span>
+        <span class="entry-date">8 Jan 2026 – 8 Jun 2026</span>
+      </div>
+      <div class="entry-subtitle">
+        <span>BuiltinSoft</span>
+        <span>Rahim Yar Khan | Onsite</span>
+      </div>
+      <ul class="bullets">
+        <li>Developed the <strong>Quran Pronunciation Checker</strong> website (AI Recitation Evaluator) utilizing OpenAI Whisper and Wav2Vec2 for phoneme-level acoustic alignment to pinpoint mispronunciations with accuracy feedback.</li>
+        <li>Trained, evaluated, and benchmarked Machine Learning and Deep Learning models (KNN, K-Means, Random Forest, SVM, Decision Trees, CNNs), matching data distributions to optimal model architectures and training pipelines.</li>
+        <li>Built automated workflow pipelines using n8n and automation tools (NIT and workflow automation) to streamline dataset preprocessing and model inference workflows.</li>
+        <li>Implemented conversational chatbot logic with Markov Chain algorithms and developed production Django REST APIs for e-commerce systems.</li>
+      </ul>
+    </div>
+
+    <!-- NCCFL -->
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Cybersecurity & Audio Forensics Intern</span>
+        <span class="entry-date">Jul 2025 – Sep 2025</span>
+      </div>
+      <div class="entry-subtitle">
+        <span>National Cyber Crime and Forensics Lab (NCCFL / Air University)</span>
+        <span>Islamabad | Hybrid</span>
+      </div>
+      <ul class="bullets">
+        <li>Built an end-to-end <strong>Audio Forensics & Tampering Detection</strong> platform to analyze audio authenticity, detect synthetic/tampered deepfakes, and generate comprehensive forensic audit reports.</li>
+        <li>Applied advanced forensic techniques: <strong>speaker diarization, temporal inconsistencies detection, timestamp verification, and acoustic metadata analysis</strong>.</li>
+        <li>Conducted sentiment analysis, acoustic feature modeling, and gender classification in an active national cybersecurity research environment; authored and presented formal technical reports.</li>
+      </ul>
+    </div>
+
+    <!-- ═══ EDUCATION ═══ -->
+    <div class="section-title">Education</div>
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">BS in Cybersecurity and Digital Forensics — CGPA: 3.50 / 4.00</span>
+        <span class="entry-date">2021 – 2025</span>
+      </div>
+      <div class="entry-subtitle">
+        <span>The Islamia University of Bahawalpur</span>
+        <span>Bahawalpur, Pakistan</span>
+      </div>
+      <ul class="bullets">
+        <li><strong>Relevant Courses:</strong> Artificial Intelligence, Machine Learning, Network Security, Cyber Forensic Analysis, Cryptography, Database Systems, Image & Video Processing, Object-Oriented Programming.</li>
+      </ul>
+    </div>
+
+    <!-- ═══ KEY PROJECTS ═══ -->
+    <div class="section-title">Key Projects</div>
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Center of Information Technology (CIT) Official Platform & Ecosystem</span>
+        <span class="entry-date">Live: <a href="https://www.cit.com.pk" target="_blank">www.cit.com.pk</a></span>
+      </div>
+      <ul class="bullets">
+        <li>Engineered official enterprise WordPress website with custom plugins, interactive geo-location directory mapping, backend MySQL optimization, n8n automated workflows, and custom AI chatbot integration.</li>
+      </ul>
+    </div>
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Healthcare Security with Blockchain & AI Anomaly Detection (Final Year Project)</span>
+        <span class="entry-date">Live: <a href="https://healerplus.live" target="_blank">healerplus.live</a></span>
+      </div>
+      <ul class="bullets">
+        <li>Designed a decentralized hospital management system using Ethereum smart contracts for role-based access control and IPFS storage, coupled with Random Forest AI anomaly detection to prevent unauthorized logins.</li>
+      </ul>
+    </div>
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Audio Forensics & Digital Tampering Detection Platform</span>
+        <span class="entry-date">Python, Whisper, DistilBERT, PyAudio</span>
+      </div>
+      <ul class="bullets">
+        <li>Web application detecting digital tampering in audio files using Whisper transcription, DistilBERT NLP authenticity analysis, speaker diarization, and acoustic metadata extraction.</li>
+      </ul>
+    </div>
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">AI-Based Phishing Detection & Threat Analysis Platform</span>
+        <span class="entry-date">Python, Flask, Scikit-learn, TF-IDF, WHOIS/DNS</span>
+      </div>
+      <ul class="bullets">
+        <li>Full-stack cybersecurity platform detecting phishing across URLs, emails, and web content in real-time, outputting confidence-scored risk classifications (Safe / Suspicious / Phishing).</li>
+      </ul>
+    </div>
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">AI-Based Traffic Sign Recognition System</span>
+        <span class="entry-date">Python, OpenCV, TensorFlow, Scikit-learn</span>
+      </div>
+      <ul class="bullets">
+        <li>CNN-based computer vision model trained on GTSRB dataset achieving 98.2% accuracy in detecting and classifying road signs.</li>
+      </ul>
+    </div>
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">PassAudit — Password Policy & Breach Auditor</span>
+        <span class="entry-date">Python, Cryptography, Hashing</span>
+      </div>
+      <ul class="bullets">
+        <li>Audits password strength against enterprise policies and verifies credentials against known breached password databases.</li>
+      </ul>
+    </div>
+
+    <!-- ═══ TECHNICAL SKILLS ═══ -->
+    <div class="section-title">Technical Skills</div>
+    <div class="skills-grid">
+      <div class="skill-cat">Programming Languages:</div>
+      <div>Python, C++, Java, JavaScript, PHP, HTML5/CSS3, SQL</div>
+      
+      <div class="skill-cat">AI & Deep Learning:</div>
+      <div>TensorFlow, Keras, PyTorch, Scikit-learn, OpenCV, HuggingFace, OpenAI Whisper, Wav2Vec2, CNNs, Random Forest, Markov Chains</div>
+      
+      <div class="skill-cat">Automation & Web CMS:</div>
+      <div>n8n Workflow Automation, NIT Automation, WordPress, Custom Plugin Development, Django REST, Flask, FastAPI, React.js</div>
+      
+      <div class="skill-cat">Cybersecurity & Forensics:</div>
+      <div>Threat Detection, Audio Forensics, Diarization, Metadata Analysis, Wireshark, Nmap, OWASP ZAP, Autopsy, FTK Imager, X-Ways, WinHex</div>
+      
+      <div class="skill-cat">Database & Cloud:</div>
+      <div>MySQL, PostgreSQL, Database Architecture, Ethereum Smart Contracts, IPFS, Microsoft Azure Cloud</div>
+    </div>
+
+    <!-- ═══ PUBLICATIONS & CERTIFICATIONS ═══ -->
+    <div class="section-title">Publications & Certifications</div>
+    <ul class="bullets">
+      <li><strong>Accepted Research Paper (ICACNC 2025):</strong> <em>Enhancing Healthcare Security with Blockchain and AI Based Anomaly Detection</em> — Eman Fatima, Rao Sharif Mansoob, Muhammad Shoaib, Iftikhar Rasheed, Umar Fayyaz.</li>
+      <li><strong>Certifications:</strong> Foundations of Cybersecurity (Google), Manage Security Risks (Google), Generative AI & Deep Learning (Boot Camp, May 2025), Microsoft Azure Cloud Services (In Progress), AI for Beginners (Microsoft).</li>
+    </ul>
+
+    <!-- ═══ LEADERSHIP ═══ -->
+    <div class="section-title">Leadership & Extracurricular</div>
+    <ul class="bullets">
+      <li><strong>Technical Host — IEEE Cybersecurity Events:</strong> Moderated expert panels, facilitated Q&A discussions, and presented cybersecurity insights to audience of 200+.</li>
+      <li><strong>Team Leader — University Lab Group:</strong> Led 5-member team on computer vision and security projects, coordinating task delegation and technical delivery.</li>
+    </ul>
+
+  </div>
+
+</body>
+</html>

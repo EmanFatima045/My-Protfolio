@@ -1,0 +1,16 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# System files
+desktop.ini
+Thumbs.db
+.DS_Store
+
+# Virtual environments
+venv/
+.env/
+env/

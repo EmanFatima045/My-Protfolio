@@ -55,15 +55,15 @@ KNOWLEDGE_BASE: List[Dict] = [
     # ── GREETINGS ──
     {
         "patterns": ["hello", "hi", "hey", "greetings", "good morning", "good afternoon", "good evening", "sup", "what's up", "salam", "assalam"],
-        "response": "👋 Hello! I'm <b>Emuu</b>, Eman Fatima's personal AI assistant. I can tell you all about her education, skills, projects, experience, and research. What would you like to know? 😊"
+        "response": "👋 Hello! I'm <b>Emuu</b>, Eman Fatima's personal AI assistant. Eman Fatima is an <b>Artificial Intelligence Engineer and Cybersecurity Analyst</b>. I can tell you all about her current role at CIT (Center of Information Technology), internships, Quran pronunciation checker, audio forensics, skills, projects, and research. What would you like to know? 😊"
     },
     {
         "patterns": ["how are you", "how r u", "how are u", "you doing", "hows it going"],
-        "response": "I'm doing great, thanks for asking! I'm here to help you learn all about Eman Fatima. Feel free to ask me anything! 😄"
+        "response": "I'm doing great, thanks for asking! I'm here to help you learn all about Eman Fatima, Artificial Intelligence Engineer & Cybersecurity Analyst. Feel free to ask me anything! 😄"
     },
     {
         "patterns": ["who are you", "what are you", "who is this", "introduce yourself", "your name"],
-        "response": "I'm <b>Emuu</b> — Eman Fatima's personal AI assistant built right into her portfolio! I know everything about her education, projects, skills, research, and experience. Go ahead, ask me anything! 🤖"
+        "response": "I'm <b>Emuu</b> — Eman Fatima's personal AI assistant built right into her portfolio! Eman Fatima is an <b>Artificial Intelligence Engineer & Cybersecurity Analyst</b>. I know everything about her work at CIT, AI internships, projects, skills, research, and experience. Go ahead, ask me anything! 🤖"
     },
     {
         "patterns": ["bye", "goodbye", "see you", "take care", "later"],
@@ -76,38 +76,48 @@ KNOWLEDGE_BASE: List[Dict] = [
 
     # ── ABOUT EMAN ──
     {
-        "patterns": ["who is eman", "who is she", "tell me about eman", "about eman", "what does eman do", "what is eman", "eman fatima", "introduce eman"],
-        "response": "Eman Fatima is a final-year <b>BS Cybersecurity & Digital Forensics</b> student at The Islamia University of Bahawalpur with a CGPA of <b>3.50</b>. She specializes in:<br>🔐 Threat detection & ethical hacking<br>⛓️ Blockchain security (Ethereum, IPFS)<br>🤖 AI anomaly detection & ML<br>🔍 Digital forensics<br><br>She's a published researcher, IEEE event host, and has built 12+ real-world security systems. Based in Rahim Yar Khan, Pakistan. 🛡️"
+        "patterns": ["who is eman", "who is she", "tell me about eman", "about eman", "what does eman do", "what is eman", "eman fatima", "introduce eman", "who is iman", "about iman", "iman fatima"],
+        "response": "<b>Eman Fatima</b> is an <b>Artificial Intelligence Engineer and Cybersecurity Analyst</b> with a BS in Cybersecurity & Digital Forensics from The Islamia University of Bahawalpur (CGPA <b>3.50</b>).<br><br>💼 <b>Current Position:</b> Working at <b>Center of Information Technology (CIT)</b> under Director <b>Sir Amar Jafri</b>, building the official WordPress website (www.cit.com.pk), custom plugins, AI chatbot integrations, n8n/NIT workflow automation, and managing website cybersecurity.<br><br>⭐ <b>Core Expertise:</b><br>🤖 AI/ML & Deep Learning Model Selection & Training<br>⚡ Workflow Automation (n8n / NIT automation)<br>🎙️ Audio Forensics, Diarization & Tamper Detection<br>🔐 Threat Detection & Network Security<br>⛓️ Blockchain Security (Ethereum, IPFS)"
     },
     {
         "patterns": ["specialization", "what she specializes", "area of expertise", "expertise", "specialty"],
-        "response": "Eman specializes in: 🔐 <b>Cybersecurity & Digital Forensics</b>, 🤖 <b>AI/ML for security</b>, ⛓️ <b>Blockchain security</b>, 🔍 <b>Threat detection & ethical hacking</b>, and 🌐 <b>Network security & OSINT</b>."
+        "response": "Eman specializes in: 🤖 <b>Artificial Intelligence & Deep Learning</b>, ⚡ <b>AI & Workflow Automation (n8n)</b>, 🔐 <b>Cybersecurity & Threat Detection</b>, 🎙️ <b>Digital & Audio Forensics</b>, 🌐 <b>WordPress & Custom Plugin Development</b>, and ⛓️ <b>Blockchain Security</b>."
     },
 
-    # ── EDUCATION ──
+    # ── CIT (CURRENT JOB & PROJECT) ──
     {
-        "patterns": ["education", "degree", "university", "college", "cgpa", "gpa", "study", "studying", "academic", "qualification", "bahawalpur", "islamia", "course", "courses", "semester"],
-        "response": "🎓 <b>Education:</b><br><br><b>BS Cybersecurity & Digital Forensics</b><br>The Islamia University of Bahawalpur<br>2021 – Present | CGPA: <b>3.50</b><br><br>📚 Relevant courses:<br>• Network Security<br>• Cyber Forensic Analysis<br>• Cryptography<br>• Artificial Intelligence<br>• Image & Video Processing<br>• Database Systems"
+        "patterns": ["cit", "center of information technology", "amar", "jaffri", "jafri", "aman", "ijaz", "cit.com.pk", "wordpress", "custom plugin", "custom plugins", "plugins", "geological", "geolocation", "geo-location", "database", "backend", "current job", "current role", "where does she work currently"],
+        "response": "💼 <b>Center of Information Technology (CIT) · Pakistan</b><br>📅 <b>Period:</b> Jul 2026 – Present (Selected: 20 July 2026)<br>👤 <b>Director:</b> Sir Amar Jaffri<br>👤 <b>Supervisor:</b> Sir Aman Ijaz<br>🌐 <b>Website:</b> <a href=\"https://www.cit.com.pk\" target=\"_blank\">www.cit.com.pk</a><br><br><b>Responsibilities & Projects at CIT:</b><br>• <b>Official Website:</b> Making the complete WordPress portal (<a href=\"https://www.cit.com.pk\" target=\"_blank\">www.cit.com.pk</a>) including About Us, Events, Directory Links, Contact, and Geo-location / geological mapping features.<br>• <b>Custom Plugins:</b> Engineered bespoke WordPress plugins tailored specifically for CIT portal needs.<br>• <b>Database & Backend:</b> Designed database structures, optimized MySQL queries, and built scalable backend API workflows.<br>• <b>AI Chatbots & Automation:</b> Built custom AI chatbots and implemented <b>n8n & NIT automated workflow pipelines</b>.<br>• <b>Cybersecurity:</b> Managing website security posture, vulnerability prevention, and system hardening under Director <b>Sir Amar Jaffri</b> and Supervisor <b>Sir Aman Ijaz</b>."
     },
 
-    # ── EXPERIENCE ──
+    # ── CMIT INTERNSHIP (BUILTINSOFT) ──
     {
-        "patterns": ["experience", "internship", "work", "job", "builtinsoft", "cyber crime lab", "national cyber", "where has she worked", "employment", "worked", "intern"],
-        "response": "💼 <b>Work Experience:</b><br><br>1️⃣ <b>AI Intern — BuiltinSoft</b> (Jan 2026 – Jun 2026)<br>📍 Rahim Yar Khan, Onsite<br>• Implemented Markov Chain algorithms & chatbot logic<br>• Built Django REST APIs for an e-commerce clothing platform<br>• Trained ML models: KNN, K-Means, Random Forest, SVM, Decision Trees<br>• Data cleaning & feature engineering<br><br>2️⃣ <b>Cybersecurity Intern — National Cyber Crime & Forensics Lab</b> (Jul – Sep 2025)<br>📍 Islamabad, Hybrid<br>• Backend development in cybersecurity research environment<br>• Sentiment analysis, gender detection, speaker diarization<br>• Technical report writing & professional presentation of findings"
+        "patterns": ["cmit", "builtinsoft", "built in soft", "quran", "pronunciation", "recitation", "tajweed", "mispronounced", "deep learning model", "ml models"],
+        "response": "🤖 <b>CMIT Internship Program — BuiltinSoft</b><br>📅 <b>Period:</b> 8 Jan 2026 – 8 Jun 2026 · Rahim Yar Khan, Onsite<br><br><b>Key Highlights:</b><br>• Developed the <b>Quran Pronunciation Checker</b> website (AI Recitation Evaluator) that captures audio and pinpoints exact mispronounced words with phoneme-level accuracy feedback.<br>• Trained, evaluated, and benchmarked multiple Machine Learning and Deep Learning models (KNN, K-Means, Random Forest, SVM, Decision Trees, CNNs), matching data distributions to optimal model architectures and training pipelines.<br>• Built automated workflow pipelines and data processing routines using n8n and automation tools (NIT and workflow automation).<br>• Implemented conversational chatbot logic with Markov Chain algorithms and developed Django REST APIs."
     },
+
+    # ── NCCFL / AIR UNIVERSITY INTERNSHIP ──
     {
-        "patterns": ["builtinsoft", "built in soft", "ai intern", "django", "ecommerce", "e-commerce", "markov"],
-        "response": "🏢 <b>BuiltinSoft Internship (Jan 2026 – Jun 2026)</b><br>📍 Rahim Yar Khan, Onsite — AI Intern<br><br>• Implemented <b>Markov Chain algorithms</b> and chatbot logic for conversational AI features<br>• Developed <b>Django REST APIs</b> for an e-commerce clothing platform<br>• Performed data cleaning, feature engineering<br>• Trained ML models: <b>KNN, K-Means, Random Forest, SVM, Decision Trees</b>"
+        "patterns": ["ncc", "nccfl", "air university", "national cyber", "cyber crime", "audio forensic", "diarization", "temporal", "tamper", "fake audio", "forensics lab", "islamabad"],
+        "response": "🛡️ <b>Cybersecurity & Audio Forensics Intern — NCCFL / Air University</b><br>📅 <b>Period:</b> Jul 2025 – Sep 2025 · Islamabad (Hybrid)<br><br><b>Key Highlights:</b><br>• Built an end-to-end <b>Audio Forensics & Tampering Detection</b> website that analyzes audio authenticity to identify fake/tampered recordings and delivers comprehensive forensic audit reports to users.<br>• Applied advanced forensic techniques: <b>speaker diarization, temporal inconsistencies detection, timestamp verification, and acoustic metadata analysis</b>.<br>• Performed sentiment analysis, acoustic feature modeling, and gender classification in an active national cybersecurity research environment.<br>• Prepared detailed technical reports and presented findings to cybersecurity researchers."
     },
+
+    # ── AUTOMATION & WORKFLOWS ──
     {
-        "patterns": ["national cyber", "cyber crime", "forensics lab", "islamabad", "cybersecurity intern", "ncfl"],
-        "response": "🏛️ <b>National Cyber Crime & Forensics Lab (Jul – Sep 2025)</b><br>📍 Islamabad, Hybrid — Cybersecurity Intern<br><br>• Applied backend development skills in a <b>cybersecurity research</b> environment<br>• Performed <b>sentiment analysis, gender detection, and speaker diarization</b><br>• Prepared technical reports and presented findings with clarity<br>• Collaborated with government cybersecurity professionals"
+        "patterns": ["automation", "n8n", "workflow", "nit", "workflows", "automate"],
+        "response": "⚡ <b>Workflow & AI Automation (n8n / NIT):</b><br><br>Eman has extensive experience building automated pipelines and workflows:<br>• <b>At CIT:</b> Automating WordPress data flows, notifications, and custom plugin integrations via n8n.<br>• <b>At CMIT:</b> Built automated data pipelines and model preprocessing routines.<br>• Expertise in connecting APIs, webhooks, databases, and AI models into seamless automated workflows."
+    },
+
+    # ── ALL WORK EXPERIENCES ──
+    {
+        "patterns": ["experience", "internship", "work", "job", "where has she worked", "employment", "worked", "intern", "career"],
+        "response": "💼 <b>Professional Experience (3 Roles):</b><br><br>1️⃣ <b>WordPress Developer, AI Automation & Cybersecurity Specialist — Center of Information Technology (CIT)</b> (Jul 2026 – Present)<br>📍 Pakistan (Director: <b>Sir Amar Jaffri</b> & Supervisor: <b>Sir Aman Ijaz</b>)<br>• Official website development (<a href=\"https://www.cit.com.pk\" target=\"_blank\">www.cit.com.pk</a>), custom plugins, database & backend, geological mapping, AI chatbot, n8n/NIT workflow automation, cybersecurity<br><br>2️⃣ <b>AI Intern (CMIT Internship Program 2025–26) — BuiltinSoft</b> (8 Jan 2026 – 8 Jun 2026)<br>📍 Rahim Yar Khan, Onsite<br>• Quran Pronunciation Checker website, ML/DL model selection & training, n8n workflow automation, Django REST APIs<br><br>3️⃣ <b>Cybersecurity & Audio Forensics Intern — National Cyber Crime & Forensics Lab (Air University)</b> (Jul – Sep 2025)<br>📍 Islamabad, Hybrid<br>• Audio Forensics deepfake tampering website, diarization, temporal inconsistencies, metadata analysis, sentiment analysis"
     },
 
     # ── ALL PROJECTS ──
     {
         "patterns": ["projects", "what projects", "show projects", "all projects", "portfolio projects", "what has she built", "her work", "list projects", "project list"],
-        "response": "🚀 <b>Eman's 12+ Projects:</b><br><br>1. 🏥 <b>Healthcare Security via Blockchain & AI</b> — FYP, live at healerplus.live<br>2. 🎵 <b>Audio Forensics & Tampering Detection</b> — Whisper + DistilBERT<br>3. 🎣 <b>AI Phishing Detection Platform</b> — NLP + WHOIS/DNS<br>4. 🚦 <b>AI Traffic Sign Recognition</b> — CNN, 98.2% accuracy<br>5. 📖 <b>AI Recitation Evaluator</b> — Wav2Vec2 + Whisper<br>6. 🐱 <b>Image Classifier (Cat vs Dog)</b> — CNN + Streamlit<br>7. 🔑 <b>PassAudit</b> — Password auditor<br>8. 🔌 <b>PortX</b> — Multi-threaded port scanner<br>9. 🔍 <b>MetaSniff</b> — Metadata OSINT forensics<br>10. 🦅 <b>StegoHawk</b> — AES-256 LSB steganography<br>11. 🔒 <b>HashGuard</b> — Multi-algo cryptographic hashing<br>12. 🧠 <b>MemStrings</b> — Memory forensics scanner<br><br>Ask me about any specific project for details!"
+        "response": "🚀 <b>Eman's Key Projects:</b><br><br>1. 🌐 <b>CIT Official Platform & Ecosystem</b> — WordPress, Custom Plugins, Database/Backend, Geo-location, n8n, AI Chatbot (Live at www.cit.com.pk)<br>2. 🏥 <b>Healthcare Security via Blockchain & AI</b> — FYP, live at healerplus.live<br>3. 🎵 <b>Audio Forensics & Tampering Detection</b> — Whisper + DistilBERT + Diarization<br>4. 🎣 <b>AI Phishing Detection Platform</b> — NLP + WHOIS/DNS<br>5. 🚦 <b>AI Traffic Sign Recognition</b> — CNN, 98.2% accuracy<br>6. 📖 <b>Quran Pronunciation Checker (AI Recitation)</b> — Wav2Vec2 + Whisper<br>7. 📊 <b>Exploratory Data Analysis & ML Benchmarking</b> — DBSCAN, Pandas<br>8. 🐱 <b>Image Classifier (Cat vs Dog)</b> — CNN + Streamlit<br>9. 🔑 <b>PassAudit</b> — Password & breach auditor<br><br>Ask me about any specific project for details!"
     },
 
     # ── SPECIFIC PROJECTS ──
