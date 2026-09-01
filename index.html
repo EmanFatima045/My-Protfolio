@@ -20,10 +20,10 @@
   --nav-bg:rgba(255,253,252,0.86); --card:#ffffff; --input-bg:#fbf4f5;
 }
 [data-theme="dark"]{
-  --bg:#1c070d; --bg2:#230a11; --surface:#280c14; --surface2:#320f19;
-  --border:#4a1a26; --border2:#5e2130;
-  --text:#fbeef0; --text2:#e3c3ca; --muted:#a2717d; --dim:#c79ba6;
-  --nav-bg:rgba(28,7,13,0.88); --card:#280c14; --input-bg:rgba(255,255,255,0.04);
+  --bg:#120307; --bg2:#1a050b; --surface:#220810; --surface2:#2c0b15;
+  --border:rgba(180,50,75,0.35); --border2:rgba(217,75,61,0.45);
+  --text:#ffffff; --text2:#ffffff; --muted:#dfc2ca; --dim:#f5e6ea;
+  --nav-bg:rgba(18,3,7,0.92); --card:rgba(28,7,13,0.88); --input-bg:rgba(255,255,255,0.08);
 }
 :root{
   --maroon:#8b1e2d; --maroon2:#c0392b; --maroon3:#d94b3d; --maroon-deep:#4b0d12;
@@ -46,8 +46,9 @@ body{
 [data-theme="dark"] body::before{
   content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
   background:
-    radial-gradient(ellipse 60% 40% at 85% 5%, rgba(138,26,55,0.18) 0%, transparent 60%),
-    radial-gradient(ellipse 55% 45% at 5% 90%, rgba(138,26,55,0.1) 0%, transparent 60%);
+    radial-gradient(ellipse 60% 40% at 85% 5%, rgba(138,26,55,0.1) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 45% at 5% 90%, rgba(138,26,55,0.06) 0%, transparent 60%);
+  opacity:0.4;
 }
 h1,h2,h3,h4,.nav-logo,.stat-num,.ldr-name,.proj-name,.exp-role,.pub-title{font-family:'Fraunces',serif}
 .sec-eyebrow,.tag,.proj-tag,.exp-period,.pub-label,.form-group label,.badge,.marq-item{font-family:'Space Mono',monospace}
@@ -72,6 +73,24 @@ nav.scrolled{padding:13px 60px;box-shadow:0 4px 24px rgba(74,14,31,0.06)}
 .nav-cta:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(74,14,31,0.35)}
 .theme-toggle{width:37px;height:37px;border-radius:50%;border:1px solid var(--border2);background:var(--surface);color:var(--muted);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:all 0.3s;flex-shrink:0}
 .theme-toggle:hover{border-color:var(--maroon2);color:var(--maroon2);transform:rotate(20deg)}
+.audio-toggle{width:37px;height:37px;border-radius:50%;border:1px solid var(--border2);background:var(--surface);color:var(--muted);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:all 0.3s;flex-shrink:0;position:relative}
+.audio-toggle:hover{border-color:var(--maroon2);color:var(--maroon2);transform:scale(1.08)}
+.audio-toggle.playing{color:var(--maroon2);border-color:var(--maroon2);box-shadow:0 0 14px rgba(192,57,43,0.35)}
+.audio-toggle.muted{opacity:0.75}
+
+/* ===== AMBIENT BACKGROUND VIDEOS (LIGHT & DARK THEMES) ===== */
+.bg-video-container{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;overflow:hidden;pointer-events:none;opacity:0;visibility:hidden;transition:opacity 0.8s ease,visibility 0.8s ease}
+.bg-video-element{position:absolute;top:50%;left:50%;min-width:100%;min-height:100%;width:auto;height:auto;transform:translate(-50%,-50%);object-fit:cover;pointer-events:none}
+
+/* Dark Theme Video Activation & Styling */
+[data-theme="dark"] .bg-video-container.dark-video{opacity:1;visibility:visible}
+[data-theme="dark"] .bg-video-container.dark-video .bg-video-element{opacity:0.82;filter:contrast(1.12) brightness(1.05) saturate(1.1)}
+.dark-overlay{position:absolute;inset:0;background:radial-gradient(circle at center,rgba(15,3,7,0.15) 0%,rgba(20,4,9,0.52) 100%);pointer-events:none}
+
+/* Light Theme Video Activation & Styling (Guarantees dark, high-contrast readable text) */
+[data-theme="light"] .bg-video-container.light-video{opacity:1;visibility:visible}
+[data-theme="light"] .bg-video-container.light-video .bg-video-element{opacity:0.75;filter:contrast(1.08) brightness(1.02) saturate(1.05)}
+.light-overlay{position:absolute;inset:0;background:radial-gradient(circle at center,rgba(255,253,252,0.22) 0%,rgba(253,245,246,0.55) 100%);pointer-events:none}
 .hamburg{display:none;font-size:20px;cursor:pointer;color:var(--text)}
 .mob-menu{position:fixed;inset:0;z-index:600;background:var(--bg);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:28px;transform:translateY(-110%);transition:transform 0.4s cubic-bezier(0.16,1,0.3,1)}
 .mob-menu.open{transform:translateY(0)}
@@ -154,10 +173,107 @@ nav.scrolled{padding:13px 60px;box-shadow:0 4px 24px rgba(74,14,31,0.06)}
 .sec-title::after{content:'';position:absolute;left:2px;bottom:-10px;height:3px;width:56px;background:var(--grad-main);border-radius:3px}
 
 .about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:start}
-.about-text{color:var(--dim);font-size:15px;line-height:1.95}
+.about-text{
+  color:var(--dim);
+  font-size:15.5px;
+  line-height:1.95;
+  background:var(--card);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:32px 34px;
+  box-shadow:0 16px 36px rgba(0,0,0,0.3);
+}
 .about-text p{margin-bottom:18px}
+.about-text p:last-child{margin-bottom:0}
 .about-text strong{color:var(--text);font-weight:700}
 .about-text a{color:var(--maroon2);text-decoration:none;border-bottom:1.5px solid rgba(74,14,31,0.35)}
+[data-theme="dark"] .about-text{
+  color:#f7e8ec;
+  background:rgba(24,5,11,0.88);
+  border:1px solid rgba(180,50,75,0.45);
+}
+[data-theme="dark"] .about-text strong{
+  color:#ffffff;
+  font-weight:800;
+  text-shadow:0 0 10px rgba(255,255,255,0.45);
+}
+[data-theme="dark"] .about-text a{
+  color:#ff7675;
+  border-color:#ff7675;
+  font-weight:700;
+}
+[data-theme="dark"] .hero-desc{color:#f7e8ec;text-shadow:0 2px 14px rgba(0,0,0,0.95)}
+[data-theme="dark"] .hero-desc strong{color:#ffffff;text-shadow:0 2px 14px rgba(0,0,0,0.95),0 0 8px rgba(255,255,255,0.4)}
+[data-theme="dark"] .about-card,
+[data-theme="dark"] .skill-box,
+[data-theme="dark"] .proj-card,
+[data-theme="dark"] .exp-item,
+[data-theme="dark"] .pub-card,
+[data-theme="dark"] .lead-card,
+[data-theme="dark"] .cert-card,
+[data-theme="dark"] .contact-item,
+[data-theme="dark"] .contact-form-box{
+  background:rgba(24,5,11,0.92);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border-color:rgba(180,50,75,0.45);
+  box-shadow:0 14px 36px rgba(0,0,0,0.5);
+}
+[data-theme="dark"] .about-card h4,
+[data-theme="dark"] .skill-box-title,
+[data-theme="dark"] .proj-name,
+[data-theme="dark"] .exp-role,
+[data-theme="dark"] .pub-title,
+[data-theme="dark"] .lead-card h4,
+[data-theme="dark"] .cert-card h4,
+[data-theme="dark"] .contact-item strong,
+[data-theme="dark"] .exp-company strong,
+[data-theme="dark"] .sec-title{
+  color:#ffffff;
+  text-shadow:0 2px 12px rgba(0,0,0,0.85);
+}
+[data-theme="dark"] .about-card p,
+[data-theme="dark"] .proj-desc,
+[data-theme="dark"] .exp-company,
+[data-theme="dark"] .exp-bullets li,
+[data-theme="dark"] .pub-authors,
+[data-theme="dark"] .pub-venue,
+[data-theme="dark"] .lead-card p,
+[data-theme="dark"] .contact-left p{
+  color:#f7e8ec;
+}
+[data-theme="dark"] .exp-bullets li strong{
+  color:#ffffff;
+  font-weight:800;
+}
+[data-theme="dark"] .exp-bullets li a{
+  color:#ff7675;
+  font-weight:700;
+  border-bottom:1px solid #ff7675;
+}
+[data-theme="dark"] .exp-bullets li::before{
+  color:#ff4757;
+}
+[data-theme="dark"] .exp-period{
+  background:rgba(192,57,43,0.25);
+  border-color:rgba(255,107,125,0.45);
+  color:#ff9aa7;
+  font-weight:700;
+}
+[data-theme="dark"] .tag,
+[data-theme="dark"] .proj-tag{
+  background:rgba(255,255,255,0.1);
+  border-color:rgba(255,255,255,0.22);
+  color:#ffffff;
+  font-weight:600;
+}
+[data-theme="dark"] .sec-eyebrow{
+  color:#ff7675;
+  font-weight:700;
+  text-shadow:0 0 10px rgba(255,118,117,0.4);
+}
 .about-cards{display:flex;flex-direction:column;gap:14px}
 .about-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;display:flex;gap:16px;align-items:flex-start;transition:border-color 0.3s,transform 0.35s,box-shadow 0.35s}
 .about-card:hover{border-color:var(--maroon3);transform:translateX(8px);box-shadow:0 16px 34px -14px rgba(74,14,31,0.3)}
@@ -184,13 +300,49 @@ nav.scrolled{padding:13px 60px;box-shadow:0 4px 24px rgba(74,14,31,0.06)}
 .cert-card h4{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px}
 .cert-card p{font-size:11px;color:var(--muted);font-family:'Space Mono',monospace}
 
-.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.projects-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:24px}
+.proj-hero{grid-column:span 6}
+.proj-half{grid-column:span 3}
+.proj-third{grid-column:span 2}
 .proj-card{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:transform 0.25s cubic-bezier(0.16,1,0.3,1),border-color 0.3s,box-shadow 0.3s;transform-style:preserve-3d;position:relative}
 .proj-card:hover{border-color:var(--maroon3);box-shadow:0 30px 60px -18px rgba(139,30,45,0.38);transform:translateY(-6px)}
 .proj-img{height:185px;position:relative;overflow:hidden;
   background:radial-gradient(ellipse at 50% 30%, #4a0e1f 0%, #2b060d 70%, #150307 100%);
   display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border)}
-[data-theme="light"] .proj-img{background:radial-gradient(ellipse at 50% 30%, #75152a 0%, #4a0e1f 65%, #2b060d 100%)}
+.proj-img.has-screenshot{
+  height:auto !important;
+  aspect-ratio:auto !important;
+  min-height:0 !important;
+  max-height:none !important;
+  position:relative;
+  overflow:hidden;
+  display:block !important;
+  line-height:0;
+  padding:0 !important;
+  background:transparent !important;
+  border-bottom:1px solid var(--border);
+}
+.proj-img.has-screenshot::before,
+.proj-img.has-screenshot::after{
+  display:none !important;
+}
+.proj-screenshot{
+  position:relative !important;
+  inset:auto !important;
+  width:100% !important;
+  height:auto !important;
+  display:block !important;
+  margin:0 !important;
+  padding:0 !important;
+  transition:transform 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.proj-card:hover .proj-screenshot{
+  transform:scale(1.025);
+}
+[data-theme="dark"] .proj-screenshot.light-only{display:none !important}
+[data-theme="dark"] .proj-screenshot.dark-only{display:block !important}
+[data-theme="light"] .proj-screenshot.dark-only{display:none !important}
+[data-theme="light"] .proj-screenshot.light-only{display:block !important}
 .proj-img-grid{
   position:absolute; inset:0; pointer-events:none; z-index:1; opacity:0.18;
   background-image:
@@ -257,20 +409,112 @@ nav.scrolled{padding:13px 60px;box-shadow:0 4px 24px rgba(74,14,31,0.06)}
 .proj-featured .proj-badge{width:90px;height:90px}
 .proj-featured .proj-badge i{font-size:38px}
 
-.exp-timeline{position:relative;padding-left:30px}
-.exp-timeline::before{content:'';position:absolute;left:0;top:8px;bottom:0;width:2px;background:linear-gradient(to bottom,var(--maroon2),transparent)}
-.exp-item{position:relative;margin-bottom:38px}
-.exp-item::before{content:'';position:absolute;left:-35px;top:6px;width:11px;height:11px;border-radius:50%;background:var(--maroon2);box-shadow:0 0 0 4px rgba(74,14,31,0.14);transition:transform 0.3s}
-.exp-item:hover::before{transform:scale(1.3)}
-.exp-header{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:8px;flex-wrap:wrap}
-.exp-role{font-size:18px;font-weight:700;color:var(--text)}
-.exp-period{font-size:10.5px;color:var(--maroon2);background:rgba(74,14,31,0.06);border:1px solid rgba(74,14,31,0.22);padding:4px 12px;border-radius:100px;white-space:nowrap}
-.exp-company{font-size:14px;color:var(--dim);margin-bottom:12px}
-.exp-company strong{color:var(--text)}
-.exp-bullets{list-style:none}
-.exp-bullets li{color:var(--dim);font-size:13.8px;padding-left:18px;position:relative;margin-bottom:6px;transition:color 0.2s,transform 0.2s}
-.exp-bullets li:hover{color:var(--text2);transform:translateX(4px)}
-.exp-bullets li::before{content:'\2022';position:absolute;left:0;color:var(--maroon2)}
+.exp-timeline{
+  position:relative;
+  padding-left:36px;
+}
+.exp-timeline::before{
+  content:'';
+  position:absolute;
+  left:10px;
+  top:14px;
+  bottom:14px;
+  width:2px;
+  background:linear-gradient(to bottom,var(--maroon2) 0%,var(--maroon3) 60%,transparent 100%);
+}
+.exp-item{
+  position:relative;
+  margin-bottom:30px;
+  background:var(--card);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:28px 32px;
+  box-shadow:0 14px 34px rgba(0,0,0,0.25);
+  transition:all 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+.exp-item:hover{
+  transform:translateX(6px);
+  border-color:var(--maroon3);
+  box-shadow:0 20px 45px rgba(0,0,0,0.35);
+}
+.exp-item::before{
+  content:'';
+  position:absolute;
+  left:-32px;
+  top:28px;
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:var(--maroon2);
+  border:3px solid var(--bg);
+  box-shadow:0 0 0 4px rgba(192,57,43,0.35);
+  transition:transform 0.3s;
+  z-index:2;
+}
+.exp-item:hover::before{
+  transform:scale(1.3);
+  background:var(--maroon3);
+}
+.exp-header{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:10px;
+  flex-wrap:wrap;
+}
+.exp-role{
+  font-size:18px;
+  font-weight:700;
+  color:var(--text);
+}
+.exp-period{
+  font-size:11px;
+  color:var(--maroon2);
+  background:rgba(74,14,31,0.08);
+  border:1px solid rgba(74,14,31,0.25);
+  padding:5px 14px;
+  border-radius:100px;
+  white-space:nowrap;
+  font-weight:700;
+}
+.exp-company{
+  font-size:14.5px;
+  color:var(--dim);
+  margin-bottom:14px;
+}
+.exp-company strong{
+  color:var(--text);
+}
+.exp-bullets{
+  list-style:none;
+}
+.exp-bullets li{
+  color:var(--dim);
+  font-size:14.5px;
+  line-height:1.8;
+  padding-left:22px;
+  position:relative;
+  margin-bottom:10px;
+  transition:color 0.2s,transform 0.2s;
+}
+.exp-bullets li:last-child{
+  margin-bottom:0;
+}
+.exp-bullets li:hover{
+  color:var(--text2);
+  transform:translateX(4px);
+}
+.exp-bullets li::before{
+  content:'\2022';
+  position:absolute;
+  left:2px;
+  top:-2px;
+  color:var(--maroon2);
+  font-size:18px;
+}
 
 .pub-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:26px;margin-bottom:14px;position:relative;transition:border-color 0.3s,transform 0.3s}
 .pub-card:hover{border-color:var(--maroon3);transform:translateX(6px)}
@@ -343,7 +587,13 @@ footer span.hl{color:var(--maroon2);font-weight:700}
   100%{opacity:0; transform:translate(-50%,-50%) scale(3.4)}
 }
 
-@media(max-width:1024px){.projects-grid{grid-template-columns:repeat(2,1fr)}.proj-featured{grid-column:span 1}.about-grid{grid-template-columns:1fr}.lead-grid{grid-template-columns:1fr}}
+@media(max-width:1024px){
+  .projects-grid{grid-template-columns:repeat(2,1fr)}
+  .proj-hero,.proj-half{grid-column:span 2}
+  .proj-third{grid-column:span 1}
+  .about-grid{grid-template-columns:1fr}
+  .lead-grid{grid-template-columns:1fr}
+}
 @media(max-width:768px){
   nav{
     padding:16px 24px
@@ -396,6 +646,10 @@ footer span.hl{color:var(--maroon2);font-weight:700}
     grid-template-columns:1fr
   }
 
+  .proj-hero,.proj-half,.proj-third{
+    grid-column:span 1
+  }
+
   .certs-row{
     grid-template-columns:1fr
   }
@@ -424,6 +678,24 @@ footer span.hl{color:var(--maroon2);font-weight:700}
 
 <div id="scroll-progress"></div>
 
+<!-- Ambient Background Video: Dark Theme -->
+<div id="bg-video-dark" class="bg-video-container dark-video" aria-hidden="true">
+  <video id="bgVideoDark" class="bg-video-element" loop playsinline preload="auto">
+    <source src="Background-Video.mp4" type="video/mp4">
+    <source src="assets/Background-Video.mp4" type="video/mp4">
+  </video>
+  <div class="bg-video-overlay dark-overlay"></div>
+</div>
+
+<!-- Ambient Background Video: Light Theme -->
+<div id="bg-video-light" class="bg-video-container light-video" aria-hidden="true">
+  <video id="bgVideoLight" class="bg-video-element" loop playsinline preload="auto">
+    <source src="Light-Theme-Video.mp4" type="video/mp4">
+    <source src="assets/Light-Theme-Video.mp4" type="video/mp4">
+  </video>
+  <div class="bg-video-overlay light-overlay"></div>
+</div>
+
 <div id="loader">
   <div class="ldr-ring"></div>
   <div class="ldr-name">Eman Fatima</div>
@@ -440,6 +712,9 @@ footer span.hl{color:var(--maroon2);font-weight:700}
     <a href="#contact" class="nav-cta">Let's Talk</a>
   </div>
   <div style="display:flex;align-items:center;gap:14px">
+    <button class="audio-toggle" id="audioToggle" onclick="toggleAudio()" title="Sound On / Off" aria-label="Toggle ambient video sound">
+      <i class="fa-solid fa-volume-high" id="audioIcon"></i>
+    </button>
     <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle theme">
       <i class="fa-solid fa-moon" id="themeIcon"></i>
     </button>
@@ -595,18 +870,11 @@ footer span.hl{color:var(--maroon2);font-weight:700}
       <h2 class="sec-title">Projects That <em>Matter</em></h2>
     </div>
     <div class="projects-grid">
-      <!-- ═══ CIT Project Card (Featured) ═══ -->
-      <div class="proj-card proj-featured reveal" data-tilt>
-        <div class="proj-img">
-          <div class="proj-img-grid"></div>
-          <div class="proj-scanline"></div>
-          <div class="proj-img-orbit o1"></div>
-          <div class="proj-img-orbit o2"></div>
-          <div class="proj-img-dot" style="top:18%;left:82%"></div>
-          <div class="proj-img-dot" style="bottom:22%;left:16%"></div>
-          <div class="proj-card-tag"><i class="fa-solid fa-satellite-dish"></i> Live Enterprise Portal</div>
-          <div class="proj-img-sheen"></div>
-          <div class="proj-badge"><i class="fa-solid fa-building-columns"></i></div>
+      <!-- ═══ CIT Project Card ═══ -->
+      <div class="proj-card proj-half reveal" data-tilt>
+        <div class="proj-img has-screenshot">
+          <img src="Dark theme CIT Image.jpeg" onerror="this.src='Dark theme CIT Image.png'" alt="CIT Official Platform Dark Theme" class="proj-screenshot dark-only">
+          <img src="Light Theme CIT Image.jpeg" alt="CIT Official Platform Light Theme" class="proj-screenshot light-only">
         </div>
         <div class="proj-body">
           <div class="proj-cat">Enterprise Web, Custom Plugins & AI · Live</div>
@@ -634,39 +902,41 @@ footer span.hl{color:var(--maroon2);font-weight:700}
       </div>
 
       <!-- ═══ Healthcare Security FYP ═══ -->
-      <div class="proj-card reveal delay-1" data-tilt>
-        <div class="proj-img">
-          <div class="proj-img-grid"></div>
-          <div class="proj-scanline"></div>
-          <div class="proj-img-orbit o1"></div>
-          <div class="proj-img-orbit o2"></div>
-          <div class="proj-img-dot" style="top:22%;left:78%"></div>
-          <div class="proj-img-dot" style="bottom:26%;left:14%"></div>
-          <div class="proj-card-tag"><i class="fa-solid fa-cube"></i> FYP · Live</div>
-          <div class="proj-img-sheen"></div>
-          <div class="proj-badge"><i class="fa-solid fa-hospital-user"></i></div>
+      <div class="proj-card proj-half reveal delay-1" data-tilt>
+        <div class="proj-img has-screenshot">
+          <img src="Health Care Dark.jpeg" alt="Healthcare Security with Blockchain & AI Dark Theme" class="proj-screenshot dark-only">
+          <img src="Health Care light.jpeg" alt="Healthcare Security with Blockchain & AI Light Theme" class="proj-screenshot light-only">
         </div>
         <div class="proj-body">
-          <div class="proj-cat">Final Year Project · Live</div>
-          <div class="proj-name">Healthcare Security with Blockchain & AI</div>
-          <p class="proj-desc">Secure hospital management system using Ethereum smart contracts for role based access control and IPFS for decentralized storage, with a Random Forest model flagging suspicious login patterns. Live at <strong style="color:var(--maroon2)">healerplus.live</strong></p>
-          <div class="proj-tech"><span class="proj-tag">Python</span><span class="proj-tag">Ethereum</span><span class="proj-tag">IPFS</span><span class="proj-tag">React.js</span><span class="proj-tag">Random Forest</span><span class="proj-tag">Flask</span></div>
-          <a href="https://github.com/EmanFatima045" target="_blank" class="proj-link"><i class="fa-brands fa-github"></i> View Source <i class="fa-solid fa-arrow-right"></i></a>
+          <div class="proj-cat">Final Year Project · Smart Healthcare · Live</div>
+          <div class="proj-name">Healthcare Security with Blockchain & AI (HealerPlus)</div>
+          <div style="font-size:11px;color:var(--maroon2);font-family:'Space Mono',monospace;font-weight:700;margin-bottom:10px;background:rgba(139,30,45,0.06);border:1px solid rgba(139,30,45,0.18);padding:5px 12px;border-radius:8px;">
+            Decentralized EHR Architecture · Ethereum & IPFS Integration · AI Behavioral Anomaly Detection
+          </div>
+          <p class="proj-desc">
+            Architected and deployed a tamper-proof decentralized hospital management ecosystem (<strong><a href="https://healerplus.live" target="_blank" style="color:var(--maroon2);text-decoration:none;font-weight:700;">healerplus.live</a></strong>). Engineered <strong>Ethereum smart contracts (Solidity)</strong> for cryptographic Role-Based Access Control (RBAC) and immutable audit logging, integrated <strong>IPFS decentralized storage</strong> for patient electronic medical records (EMR) with zero single-point-of-failure, and embedded an <strong>AI Random Forest anomaly detection engine</strong> that actively evaluates user access metrics and flags malicious intrusion attempts in real time.
+          </p>
+          <div class="proj-tech">
+            <span class="proj-tag">Ethereum</span>
+            <span class="proj-tag">Solidity</span>
+            <span class="proj-tag">IPFS</span>
+            <span class="proj-tag">Python Flask</span>
+            <span class="proj-tag">React.js</span>
+            <span class="proj-tag">Random Forest</span>
+            <span class="proj-tag">Cybersecurity</span>
+          </div>
+          <div style="display:flex;gap:14px;align-items:center;margin-top:auto;flex-wrap:wrap;">
+            <a href="https://healerplus.live" target="_blank" class="proj-link" style="color:var(--maroon2);"><i class="fa-solid fa-arrow-up-right-from-square"></i> Visit healerplus.live <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="https://github.com/EmanFatima045" target="_blank" class="proj-link" style="color:var(--dim);"><i class="fa-brands fa-github"></i> GitHub</a>
+          </div>
         </div>
       </div>
 
       <!-- ═══ Audio Forensics & Tampering ═══ -->
-      <div class="proj-card reveal delay-2" data-tilt>
-        <div class="proj-img">
-          <div class="proj-img-grid"></div>
-          <div class="proj-scanline"></div>
-          <div class="proj-img-orbit o1"></div>
-          <div class="proj-img-orbit o2"></div>
-          <div class="proj-img-dot" style="top:20%;left:80%"></div>
-          <div class="proj-img-dot" style="bottom:25%;left:18%"></div>
-          <div class="proj-card-tag"><i class="fa-solid fa-wave-square"></i> Forensics AI</div>
-          <div class="proj-img-sheen"></div>
-          <div class="proj-badge"><i class="fa-solid fa-waveform-lines"></i></div>
+      <div class="proj-card proj-half reveal delay-2" data-tilt>
+        <div class="proj-img has-screenshot">
+          <img src="Audio forensic Dark.jpeg" alt="Audio Forensics & Tampering Platform Dark Theme" class="proj-screenshot dark-only">
+          <img src="Audio Forensic Light.jpeg" alt="Audio Forensic Light Theme" class="proj-screenshot light-only">
         </div>
         <div class="proj-body">
           <div class="proj-cat">Digital Forensics · AI</div>
@@ -678,17 +948,10 @@ footer span.hl{color:var(--maroon2);font-weight:700}
       </div>
 
       <!-- ═══ AI Phishing Detection ═══ -->
-      <div class="proj-card reveal" data-tilt>
-        <div class="proj-img">
-          <div class="proj-img-grid"></div>
-          <div class="proj-scanline"></div>
-          <div class="proj-img-orbit o1"></div>
-          <div class="proj-img-orbit o2"></div>
-          <div class="proj-img-dot" style="top:22%;left:78%"></div>
-          <div class="proj-img-dot" style="bottom:26%;left:14%"></div>
-          <div class="proj-card-tag"><i class="fa-solid fa-shield-virus"></i> Cyber ML</div>
-          <div class="proj-img-sheen"></div>
-          <div class="proj-badge"><i class="fa-solid fa-fish-fins"></i></div>
+      <div class="proj-card proj-half reveal delay-3" data-tilt>
+        <div class="proj-img has-screenshot">
+          <img src="Phisphing Dark.jpeg" alt="AI Based Phishing Detection & Threat Analysis Dark Theme" class="proj-screenshot dark-only">
+          <img src="Phisphing Light.jpeg" alt="AI Based Phishing Detection & Threat Analysis Light Theme" class="proj-screenshot light-only">
         </div>
         <div class="proj-body">
           <div class="proj-cat">Cybersecurity · Machine Learning</div>
@@ -700,17 +963,10 @@ footer span.hl{color:var(--maroon2);font-weight:700}
       </div>
 
       <!-- ═══ Traffic Sign Recognition ═══ -->
-      <div class="proj-card reveal delay-1" data-tilt>
-        <div class="proj-img">
-          <div class="proj-img-grid"></div>
-          <div class="proj-scanline"></div>
-          <div class="proj-img-orbit o1"></div>
-          <div class="proj-img-orbit o2"></div>
-          <div class="proj-img-dot" style="top:22%;left:78%"></div>
-          <div class="proj-img-dot" style="bottom:26%;left:14%"></div>
-          <div class="proj-card-tag"><i class="fa-solid fa-eye"></i> Vision DL</div>
-          <div class="proj-img-sheen"></div>
-          <div class="proj-badge"><i class="fa-solid fa-traffic-light"></i></div>
+      <div class="proj-card proj-half reveal delay-1" data-tilt>
+        <div class="proj-img has-screenshot">
+          <img src="Traffic Dark.jpeg" alt="AI Based Traffic Sign Recognition Dark Theme" class="proj-screenshot dark-only">
+          <img src="Traffic Light.jpeg" alt="AI Based Traffic Sign Recognition Light Theme" class="proj-screenshot light-only">
         </div>
         <div class="proj-body">
           <div class="proj-cat">Computer Vision · Deep Learning</div>
@@ -722,17 +978,10 @@ footer span.hl{color:var(--maroon2);font-weight:700}
       </div>
 
       <!-- ═══ Quran Pronunciation Checker ═══ -->
-      <div class="proj-card reveal delay-2" data-tilt>
-        <div class="proj-img">
-          <div class="proj-img-grid"></div>
-          <div class="proj-scanline"></div>
-          <div class="proj-img-orbit o1"></div>
-          <div class="proj-img-orbit o2"></div>
-          <div class="proj-img-dot" style="top:22%;left:78%"></div>
-          <div class="proj-img-dot" style="bottom:26%;left:14%"></div>
-          <div class="proj-card-tag"><i class="fa-solid fa-microphone-lines"></i> AI Recitation</div>
-          <div class="proj-img-sheen"></div>
-          <div class="proj-badge"><i class="fa-solid fa-microphone"></i></div>
+      <div class="proj-card proj-half reveal delay-2" data-tilt>
+        <div class="proj-img has-screenshot">
+          <img src="Quran Dark.jpeg" alt="Quran Pronunciation Checker Dark Theme" class="proj-screenshot dark-only">
+          <img src="Quran Light.jpeg" alt="Quran Pronunciation Checker Light Theme" class="proj-screenshot light-only">
         </div>
         <div class="proj-body">
           <div class="proj-cat">AI · NLP · Tajweed Evaluator</div>
@@ -744,68 +993,92 @@ footer span.hl{color:var(--maroon2);font-weight:700}
       </div>
 
       <!-- ═══ EDA & ML Benchmarking ═══ -->
-      <div class="proj-card reveal" data-tilt>
-        <div class="proj-img">
-          <div class="proj-img-grid"></div>
-          <div class="proj-scanline"></div>
-          <div class="proj-img-orbit o1"></div>
-          <div class="proj-img-orbit o2"></div>
-          <div class="proj-img-dot" style="top:22%;left:78%"></div>
-          <div class="proj-img-dot" style="bottom:26%;left:14%"></div>
-          <div class="proj-card-tag"><i class="fa-solid fa-chart-pie"></i> Data Science</div>
-          <div class="proj-img-sheen"></div>
-          <div class="proj-badge"><i class="fa-solid fa-chart-line"></i></div>
+      <div class="proj-card proj-half reveal delay-1" data-tilt>
+        <div class="proj-img has-screenshot">
+          <img src="Exploratory Data Dark.jpeg" alt="Exploratory Data Analysis & ML Benchmarking Dark Theme" class="proj-screenshot dark-only">
+          <img src="Exploratory Data Light.jpeg" alt="Exploratory Data Analysis & ML Benchmarking Light Theme" class="proj-screenshot light-only">
         </div>
         <div class="proj-body">
-          <div class="proj-cat">Data Science · EDA</div>
-          <div class="proj-name">Exploratory Data Analysis & ML Benchmarking</div>
-          <p class="proj-desc">End to end data science project covering missing value handling, outlier detection and correlation analysis, benchmarking six ML algorithms including DBSCAN for spatial anomaly detection.</p>
-          <div class="proj-tech"><span class="proj-tag">Pandas</span><span class="proj-tag">NumPy</span><span class="proj-tag">DBSCAN</span><span class="proj-tag">Seaborn</span></div>
-          <a href="https://github.com/EmanFatima045" target="_blank" class="proj-link"><i class="fa-brands fa-github"></i> View Source <i class="fa-solid fa-arrow-right"></i></a>
+          <div class="proj-cat">Data Science · Machine Learning · EDA</div>
+          <div class="proj-name">Exploratory Data Analysis & ML Benchmarking Suite</div>
+          <div style="font-size:11px;color:var(--maroon2);font-family:'Space Mono',monospace;font-weight:700;margin-bottom:10px;background:rgba(139,30,45,0.06);border:1px solid rgba(139,30,45,0.18);padding:5px 12px;border-radius:8px;">
+            Automated Feature Engineering · 6 ML Benchmark Pipeline · Spatial DBSCAN Anomaly Clustering
+          </div>
+          <p class="proj-desc">
+            Architected an end-to-end data analytics and predictive benchmarking pipeline. Formulated advanced data preprocessing workflows handling skewed distributions, missing value imputation, multi-collinearity checks (VIF), and interquartile outlier filtering. Benchmarked 6 machine learning algorithms (Random Forest, XGBoost, SVM, Gradient Boosting, KNN, and DBSCAN for spatial density clustering) with rigorous 10-fold cross-validation, hyperparameter tuning via GridSearchCV, and interactive Seaborn/Plotly visual diagnostics.
+          </p>
+          <div class="proj-tech">
+            <span class="proj-tag">Pandas</span>
+            <span class="proj-tag">NumPy</span>
+            <span class="proj-tag">Scikit-Learn</span>
+            <span class="proj-tag">XGBoost</span>
+            <span class="proj-tag">DBSCAN</span>
+            <span class="proj-tag">GridSearchCV</span>
+            <span class="proj-tag">Seaborn</span>
+          </div>
+          <div style="display:flex;gap:14px;align-items:center;margin-top:auto;flex-wrap:wrap;">
+            <a href="https://github.com/EmanFatima045" target="_blank" class="proj-link"><i class="fa-brands fa-github"></i> View Source <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
         </div>
       </div>
 
       <!-- ═══ Image Classifier ═══ -->
-      <div class="proj-card reveal delay-1" data-tilt>
-        <div class="proj-img">
-          <div class="proj-img-grid"></div>
-          <div class="proj-scanline"></div>
-          <div class="proj-img-orbit o1"></div>
-          <div class="proj-img-orbit o2"></div>
-          <div class="proj-img-dot" style="top:22%;left:78%"></div>
-          <div class="proj-img-dot" style="bottom:26%;left:14%"></div>
-          <div class="proj-card-tag"><i class="fa-solid fa-brain"></i> Deep Learning</div>
-          <div class="proj-img-sheen"></div>
-          <div class="proj-badge"><i class="fa-solid fa-paw"></i></div>
+      <div class="proj-card proj-half reveal delay-2" data-tilt>
+        <div class="proj-img has-screenshot">
+          <img src="Image Classifier Dark.jpeg" alt="Image Classifier with Confidence Threshold Dark Theme" class="proj-screenshot dark-only">
+          <img src="Image Classifier Light.jpeg" alt="Image Classifier with Confidence Threshold Light Theme" class="proj-screenshot light-only">
         </div>
         <div class="proj-body">
-          <div class="proj-cat">Deep Learning · CNN</div>
-          <div class="proj-name">Image Classifier with Confidence Threshold</div>
-          <p class="proj-desc">CNN based classifier for Cat versus Dog categorization, with a confidence threshold to flag unknown animals and per class confidence scores in a Streamlit interface.</p>
-          <div class="proj-tech"><span class="proj-tag">TensorFlow</span><span class="proj-tag">CNN</span><span class="proj-tag">Streamlit</span></div>
-          <a href="https://github.com/EmanFatima045" target="_blank" class="proj-link"><i class="fa-brands fa-github"></i> View Source <i class="fa-solid fa-arrow-right"></i></a>
+          <div class="proj-cat">Computer Vision · Deep Learning · CNN</div>
+          <div class="proj-name">AI Image Classifier with Dynamic Confidence Threshold</div>
+          <div style="font-size:11px;color:var(--maroon2);font-family:'Space Mono',monospace;font-weight:700;margin-bottom:10px;background:rgba(139,30,45,0.06);border:1px solid rgba(139,30,45,0.18);padding:5px 12px;border-radius:8px;">
+            Convolutional Neural Network (CNN) · Out-of-Distribution (OOD) Rejection · Streamlit Cloud
+          </div>
+          <p class="proj-desc">
+            Designed a deep learning computer vision system for real-time multiclass animal classification. Engineered a custom multi-layer Convolutional Neural Network (CNN) with Batch Normalization, Dropout regularization, and Softmax probability distributions. Implemented an innovative Confidence Threshold Gate that flags out-of-distribution (OOD) and ambiguous inputs to prevent false positive classifications, wrapped in an interactive Streamlit UI with real-time class heatmaps and confidence score telemetry.
+          </p>
+          <div class="proj-tech">
+            <span class="proj-tag">TensorFlow</span>
+            <span class="proj-tag">Keras</span>
+            <span class="proj-tag">CNN Architecture</span>
+            <span class="proj-tag">Computer Vision</span>
+            <span class="proj-tag">Streamlit</span>
+            <span class="proj-tag">OpenCV</span>
+            <span class="proj-tag">Python</span>
+          </div>
+          <div style="display:flex;gap:14px;align-items:center;margin-top:auto;flex-wrap:wrap;">
+            <a href="https://github.com/EmanFatima045" target="_blank" class="proj-link"><i class="fa-brands fa-github"></i> View Source <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
         </div>
       </div>
 
       <!-- ═══ PassAudit ═══ -->
-      <div class="proj-card reveal delay-2" data-tilt>
-        <div class="proj-img">
-          <div class="proj-img-grid"></div>
-          <div class="proj-scanline"></div>
-          <div class="proj-img-orbit o1"></div>
-          <div class="proj-img-orbit o2"></div>
-          <div class="proj-img-dot" style="top:22%;left:78%"></div>
-          <div class="proj-img-dot" style="bottom:26%;left:14%"></div>
-          <div class="proj-card-tag"><i class="fa-solid fa-lock"></i> Security Audit</div>
-          <div class="proj-img-sheen"></div>
-          <div class="proj-badge"><i class="fa-solid fa-lock"></i></div>
+      <div class="proj-card proj-half reveal delay-3" data-tilt>
+        <div class="proj-img has-screenshot">
+          <img src="PassAudit Dark.jpeg" onerror="this.src='PassAudit Dark.jpeg'" alt="PassAudit — Policy & Breach Auditor Dark Theme" class="proj-screenshot dark-only">
+          <img src="Pass Audit Light.jpeg" onerror="this.src='Pass Audit Light.jpeg'" alt="PassAudit — Policy & Breach Auditor Light Theme" class="proj-screenshot light-only">
         </div>
         <div class="proj-body">
-          <div class="proj-cat">Security Auditing</div>
-          <div class="proj-name">PassAudit — Policy & Breach Auditor</div>
-          <p class="proj-desc">Audits password strength, enforces policy requirements and checks credentials against known breached password databases in real time.</p>
-          <div class="proj-tech"><span class="proj-tag">Python</span><span class="proj-tag">Cryptography</span></div>
-          <a href="https://github.com/EmanFatima045" target="_blank" class="proj-link"><i class="fa-brands fa-github"></i> View Source <i class="fa-solid fa-arrow-right"></i></a>
+          <div class="proj-cat">Cybersecurity · Security Auditing · Cryptography</div>
+          <div class="proj-name">PassAudit — Enterprise Policy & Breach Auditor</div>
+          <div style="font-size:11px;color:var(--maroon2);font-family:'Space Mono',monospace;font-weight:700;margin-bottom:10px;background:rgba(139,30,45,0.06);border:1px solid rgba(139,30,45,0.18);padding:5px 12px;border-radius:8px;">
+            NIST SP 800-63B Compliance · SHA-1 k-Anonymity Hashing · Real-Time Breach Telemetry
+          </div>
+          <p class="proj-desc">
+            Engineered a high-performance credential security auditing platform enforcing modern NIST SP 800-63B compliance standards. Implemented mathematical entropy analysis, dictionary attack pattern detection, and real-time credential verification against compromised database records using k-Anonymity SHA-1 cryptographic range hashing—ensuring zero sensitive plaintext exposure. Features comprehensive password health scoring, policy enforcement, and forensic compliance auditing.
+          </p>
+          <div class="proj-tech">
+            <span class="proj-tag">Python</span>
+            <span class="proj-tag">Cryptography</span>
+            <span class="proj-tag">k-Anonymity</span>
+            <span class="proj-tag">SHA Hashing</span>
+            <span class="proj-tag">Entropy Analysis</span>
+            <span class="proj-tag">Cybersecurity</span>
+            <span class="proj-tag">NIST Standards</span>
+          </div>
+          <div style="display:flex;gap:14px;align-items:center;margin-top:auto;flex-wrap:wrap;">
+            <a href="https://github.com/EmanFatima045" target="_blank" class="proj-link"><i class="fa-brands fa-github"></i> View Source <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
         </div>
       </div>
     </div>
@@ -946,22 +1219,125 @@ footer span.hl{color:var(--maroon2);font-weight:700}
 
 <script src="assets/oneko.js" data-cat="assets/oneko.gif"></script>
 <script>
+// Background Videos & Sound Controller for Dual Themes (Light & Dark)
+let isUserMuted = localStorage.getItem('ef-sound') === 'muted';
+let hasUserInteracted = false;
+
+function getActiveVideo() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  return isDark ? document.getElementById('bgVideoDark') : document.getElementById('bgVideoLight');
+}
+
+function getInactiveVideo() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  return isDark ? document.getElementById('bgVideoLight') : document.getElementById('bgVideoDark');
+}
+
+function updateAudioUI(isMuted) {
+  const btn = document.getElementById('audioToggle');
+  const icon = document.getElementById('audioIcon');
+  if (!btn || !icon) return;
+  
+  if (isMuted) {
+    icon.className = 'fa-solid fa-volume-xmark';
+    btn.classList.remove('playing');
+    btn.classList.add('muted');
+    btn.setAttribute('title', 'Sound Muted (Click to Unmute)');
+  } else {
+    icon.className = 'fa-solid fa-volume-high';
+    btn.classList.add('playing');
+    btn.classList.remove('muted');
+    btn.setAttribute('title', 'Sound On (Click to Mute)');
+  }
+}
+
+function syncActiveThemeVideo() {
+  const activeVideo = getActiveVideo();
+  const inactiveVideo = getInactiveVideo();
+
+  // Pause and silence inactive theme video
+  if (inactiveVideo) {
+    inactiveVideo.pause();
+    inactiveVideo.muted = true;
+  }
+
+  if (!activeVideo) return;
+
+  activeVideo.muted = isUserMuted;
+  updateAudioUI(activeVideo.muted);
+
+  const playPromise = activeVideo.play();
+  if (playPromise !== undefined) {
+    playPromise.catch(() => {
+      // If browser blocked unmuted autoplay, start muted first to display visuals
+      activeVideo.muted = true;
+      activeVideo.play().catch(() => {});
+      updateAudioUI(true);
+
+      // Unmute on the first interaction if user hasn't explicitly muted
+      if (!isUserMuted && !hasUserInteracted) {
+        const unlockAudio = () => {
+          hasUserInteracted = true;
+          const cur = getActiveVideo();
+          if (cur && !isUserMuted) {
+            cur.muted = false;
+            updateAudioUI(false);
+          }
+          ['click', 'touchstart', 'keydown'].forEach(e => window.removeEventListener(e, unlockAudio));
+        };
+        ['click', 'touchstart', 'keydown'].forEach(e => window.addEventListener(e, unlockAudio, { once: true }));
+      }
+    });
+  }
+}
+
+function toggleAudio() {
+  const activeVideo = getActiveVideo();
+  if (!activeVideo) return;
+
+  if (activeVideo.muted) {
+    activeVideo.muted = false;
+    isUserMuted = false;
+    localStorage.setItem('ef-sound', 'unmuted');
+    if (activeVideo.paused) {
+      activeVideo.play().catch(() => {});
+    }
+  } else {
+    activeVideo.muted = true;
+    isUserMuted = true;
+    localStorage.setItem('ef-sound', 'muted');
+  }
+  updateAudioUI(activeVideo.muted);
+}
+
 function toggleTheme() {
   const html = document.documentElement;
   const isDark = html.getAttribute('data-theme') === 'dark';
-  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-  document.getElementById('themeIcon').className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
-  localStorage.setItem('ef-theme', isDark ? 'light' : 'dark');
+  const newTheme = isDark ? 'light' : 'dark';
+  
+  html.setAttribute('data-theme', newTheme);
+  const themeIcon = document.getElementById('themeIcon');
+  if (themeIcon) {
+    themeIcon.className = newTheme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+  }
+  localStorage.setItem('ef-theme', newTheme);
+
+  syncActiveThemeVideo();
 }
+
 (function(){
   const saved = localStorage.getItem('ef-theme');
   if (saved === 'dark') {
     document.documentElement.setAttribute('data-theme','dark');
-    document.addEventListener('DOMContentLoaded', () => {
-      const icon = document.getElementById('themeIcon');
-      if (icon) icon.className = 'fa-solid fa-sun';
-    });
   }
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const icon = document.getElementById('themeIcon');
+    if (icon) icon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+    
+    syncActiveThemeVideo();
+  });
 })();
 
 window.addEventListener('scroll', () => {

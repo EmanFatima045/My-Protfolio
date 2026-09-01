@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eman Fatima | Artificial Intelligence Engineer & Cybersecurity Analyst</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo" data-aos="zoom-in" data-aos-duration="1500">
+                Eman <span>Fatima</span>
+            </div>
+            <div class="links">
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="100"><a href="home.html">Home</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200"><a href="skills.html">Skills</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300"><a href="projects.html">Projects</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="400"><a href="resume.html" target="_blank">Resume</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="500"><a href="contact.html">Contact</a></div>
+            </div>
+        </div>
+        <i class="fa-solid fa-bars hamburg" onclick="hamburg()"></i>
+        <div class="dropdown">
+            <div class="links">
+                <a href="home.html">Home</a>
+                <a href="skills.html">Skills</a>
+                <a href="projects.html">Projects</a>
+                <a href="resume.html" target="_blank">Resume</a>
+                <a href="contact.html">Contact</a>
+                <i class="fa-solid fa-xmark cancel" onclick="cancel()"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Hero Section -->
+    <section>
+        <div class="main-container">
+            <div class="content" data-aos="fade-right" data-aos-duration="1500">
+                <h1>Hi, I'm <span>Eman Fatima</span></h1>
+                <div class="typewriter">I am an <span class="typewriter-text"></span></div>
+                <p>
+                    BS graduate in <strong>Cybersecurity &amp; Digital Forensics</strong> from The Islamia University of Bahawalpur (CGPA 3.50), with hands-on expertise in <strong>AI engineering, threat detection, digital forensics, blockchain security, and full-stack web development</strong>. Currently working at <strong>Center of Information Technology (CIT)</strong>.
+                </p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/eman-fatima-512a01246/" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://github.com/EmanFatima045" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a href="mailto:emanfatima60860@gmail.com" title="Email"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+                <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;">
+                    <a href="projects.html" class="btn-primary" style="margin:0;"><i class="fa-solid fa-shield-halved"></i> View Projects</a>
+                    <button onclick="downloadCV()" style="margin:0;"><i class="fa-solid fa-file-pdf"></i> Download CV</button>
+                </div>
+            </div>
+            <div class="image" data-aos="fade-left" data-aos-duration="1500">
+                <img src="assets/main.jpg" onerror="this.src='main.jpg'" alt="Eman Fatima">
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ offset: 0 });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
